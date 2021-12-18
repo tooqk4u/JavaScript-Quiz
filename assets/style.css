@@ -1,0 +1,83 @@
+:root {
+    --gray: gray
+    --blue: blue;
+    --white: white ;
+  }
+  * {
+    font-size: 26px;
+    margin: 0;
+    background-color: var(--gray);
+  }
+
+  .hide {
+      display:none
+  }
+  button {
+    background-color: rgb(201, 107, 201);/*var(--white);*
+    padding: 15px;
+    border-radius: 20px;
+    color: white/*var(--blue);*/
+  }
+  button:focus,
+  button:active {
+    outline: none;
+  }
+  .timer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20% 10px 10%;
+    background-color: var(--white);
+    color: var(--blue);
+    align-content: center;
+   }
+  
+  .timer p {
+    background-color: var(--white);
+  }
+  .timer p span {
+    background-color: var(--white);
+  }
+  footer h2 {
+    margin-top: 5%;
+    font-size: 0.7em;
+    text-align: center;
+    
+    
+  }
+  .quiz {
+    padding: 20px auto;
+  }
+  .start-btn {
+    margin: 30px auto 100px 15%;
+  }
+  #instructions {
+    margin: 25px auto 0 35%;
+  }
+   #line2 {
+    margin-left: 55px;
+    margin-bottom: 25%;
+  }
+  #warning {
+    margin: 0 auto 0 15%;
+    color: red;
+    /* font-weight: bolder; */
+    background-color: black;
+  }
+  
+
+ #diplay-questions p {
+  justify-content: center;
+  text-align: center;
+  
+ }
+#display-questions h3 {
+  display: flex;  
+  flex-direction: column;
+  font-size: 1.2em;  
+  text-align: center;
+  justify-content: center;
+}
+#display-questions button, .message{
+  margin: 1% 0% 1% 35%;  
+  justify-content: center;
+}
