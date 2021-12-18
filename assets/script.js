@@ -70,6 +70,16 @@ let questions = [
   },
 ];
 let timeLeft = questions.length * 15;
+
+startBtn.addEventListener("click", startQuiz);
+function startQuiz() {
+  displayQuestions.classList.remove("hide");
+  introBody.classList.add("hide");
+  //start the clock-set interval//
+  timeInterval = setInterval(countdown, 1000);
+
+  showQuestion();
+}
 function showQuestion() {
     displayQuestions.innerHTML = `<h3> ${questions[questionsIndex].questions} </h3>
       <p><button class="choices">${questions[questionsIndex].choice1}</
