@@ -15,7 +15,7 @@ let timeInterval;
 let correctAnswers = 0
 let questions = [
   {
-    questions: "1. What is the HTML tag under which one can write the JavaScript code?",
+    question: "1. What is the HTML tag under which one can write the JavaScript code?",
 
     choice1: "1. javascript",
     choice2: "2. scripted",
@@ -24,7 +24,7 @@ let questions = [
     answer: "4. script",
   },
   {
-    questions: "2. Commonly used data types do NOT include:",
+    question: "2. Commonly used data types do NOT include:",
 
     choice1: "1. strings",
     choice2: "2. boxes",
@@ -33,7 +33,7 @@ let questions = [
     answer: "2. boxes",
   },
   {
-    questions: "3. What does the word DOM stand for in JavaScript?",
+    question: "3. What does the word DOM stand for in JavaScript?",
 
     choice1: "1. Document Object Model",
     choice2: "2. Document Outline Model",
@@ -42,7 +42,7 @@ let questions = [
     answer: "1. Document Object Model",
   },
   {
-    questions: "4. Global variables should be defined in which section of the JavaScript file?",
+    question: "4. Global variables should be defined in which section of the JavaScript file?",
 
     choice1: "1. Bottom",
     choice2: "2. Middle",
@@ -51,7 +51,7 @@ let questions = [
     answer: "3. Beginning",
   },
   {
-    questions: "5. What are variables used for in JavaScript?",
+    question: "5. What are variables used for in JavaScript?",
 
     choice1: "1. Storing numbers, dates, or other values",
     choice2: "2. Causing high-school algebra flashbacks",
@@ -60,7 +60,7 @@ let questions = [
     answer: "1. Storing numbers, dates, or other values",
   },
   { 
-    questions: "6. What is the correct way to write a JavaScript array?",
+    question: "6. What is the correct way to write a JavaScript array?",
 
     choice1: "1. let colors = 'red', 'green', 'blue'",
     choice2: "2. let colors = (1:'red', 2:'green', 3:'blue')",
@@ -69,9 +69,14 @@ let questions = [
     answer: "4. let colors = ['red', 'green', 'blue']",
   },
 ];
+
+//time length of quiz
 let timeLeft = questions.length * 15;
 
+//start button function
 startBtn.addEventListener("click", startQuiz);
+
+//start quiz function
 function startQuiz() {
   displayQuestions.classList.remove("hide");
   introBody.classList.add("hide");
@@ -80,8 +85,9 @@ function startQuiz() {
 
   showQuestion();
 }
+//show questions function 
 function showQuestion() {
-    displayQuestions.innerHTML = `<h3> ${questions[questionsIndex].questions} </h3>
+    displayQuestions.innerHTML = `<h3> ${questions[questionsIndex].question} </h3>
       <p><button class="choices">${questions[questionsIndex].choice1}</
   button></p>
       <p><button class="choices">${questions[questionsIndex].choice2}</
@@ -95,4 +101,33 @@ function showQuestion() {
   
     let choices = document.querySelectorAll(".choices");
     let message = document.querySelector(".message");
-}
+    // for loop to loop thur questions and answers
+    for (let i = 0; i < choices.length; i++) {
+      choices[i].addEventListener("click", function () {
+        let buttontext = this.textContent;
+        if (questionsIndex < questions.length) {
+          if (questions[questionsIndex].answer === buttontext) {
+            message.textContent = "Correct!";
+            correctAnswers++
+            console.log(correctAnswers)
+          } else {
+            message.textContent = "Wrong!" //The correct answer is " + questions[questionsIndex].answer;//
+            timeLeft = timeLeft - 15;
+          }
+          questionsIndex++;
+          if (questionsIndex < questions.length) {
+            setTimeout(showQuestion, 500);
+              
+         } else {
+          clearInterval(timeInterval);
+          displayQuestions.classList.add("hide");
+          initials.classList.remove("hide");
+          //showSaveBtn()
+         }
+        }
+      });
+      console.log(correctAnswers)
+    }  
+};
+showQuestion()
+
