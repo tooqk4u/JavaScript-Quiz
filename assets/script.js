@@ -1,5 +1,5 @@
 //Global Variables
-
+let playerInfo = ""
 let score = 0;
 let startBtn = document.querySelector("#start-btn");
 let introBody = document.querySelector(".quiz");
@@ -11,8 +11,10 @@ let questionsIndex = 0;
 let initials = document.querySelector("#initials");
 let highScore = document.querySelector("#high-score");
 let saveBtn = document.querySelector("#save-btn")
+let displayMessage = document.querySelector(".save-message")
 let timeInterval;
-let correctAnswers = 0
+let correctAnswers = 0;
+let scoreArray = []
 let questions = [
   {
     question: "1. What is the HTML tag under which one can write the JavaScript code?",
@@ -73,35 +75,37 @@ let questions = [
 //time length of quiz
 let timeLeft = questions.length * 15;
 
-//start button function
+//Start button function
 startBtn.addEventListener("click", startQuiz);
 
-//start quiz function
+//Start quiz function
 function startQuiz() {
   displayQuestions.classList.remove("hide");
   introBody.classList.add("hide");
-  //start the clock-set interval//
+  //Start the clock-set interval//
   timeInterval = setInterval(countdown, 1000);
 
   showQuestion();
 }
-//show questions function 
+//Show questions function 
 function showQuestion() {
-    displayQuestions.innerHTML = `<h3> ${questions[questionsIndex].question} </h3>
-      <p><button class="choices">${questions[questionsIndex].choice1}</
-  button></p>
-      <p><button class="choices">${questions[questionsIndex].choice2}</
-  button></p>
-      <p><button class="choices">${questions[questionsIndex].choice3}</
-  button></p>
-      <p><button class="choices">${questions[questionsIndex].choice4}</
-  button></p>
-      <p> <h4 class="message"></h4>     </p>
-      `;
+  displayQuestions.innerHTML = `<h3> ${questions
+[questionsIndex].question} </h3>
+    <p><button class="choices btn">${questions
+[questionsIndex].choice1}</button></p>
+    <p><button class="choices btn">${questions
+[questionsIndex].choice2}</button></p>
+    <p><button class="choices btn">${questions
+[questionsIndex].choice3}</button></p>
+    <p><button class="choices btn">${questions
+[questionsIndex].choice4}</button></p>
+    <p> <h4 class="message"></h4></p>
+    `;
   
     let choices = document.querySelectorAll(".choices");
     let message = document.querySelector(".message");
-    // for loop to loop thur questions and answers
+
+    // For loop to loop thru questions and answers
     for (let i = 0; i < choices.length; i++) {
       choices[i].addEventListener("click", function () {
         let buttontext = this.textContent;
@@ -122,12 +126,45 @@ function showQuestion() {
           clearInterval(timeInterval);
           displayQuestions.classList.add("hide");
           initials.classList.remove("hide");
-          //showSaveBtn()
          }
+         
         }
       });
       console.log(correctAnswers)
-    }  
+    }
+    correctAnswers/questions.length * 100 
 };
-showQuestion()
 
+//Timer function
+function countdown() {
+  if (timeLeft >= 0) {
+    timerE1.textContent = timeLeft;
+    timeLeft--;
+  } else {
+    timerE1.textContent = "You have run out of time";
+    clearInterval(timeInterval);
+    displayQuestions.classList.add("hide");
+    initials.classList.remove("hide");
+    
+  }
+}
+
+//
+saveBtn.addEventListener("click", saveScores)
+function saveScores(){
+  let initialsInput = document.querySelector("#name").value
+  console.log(initialsInput)
+ 
+  let score = timeLeft//correctAnswers/questions.length * 100;
+  console.log(timeLeft);
+
+  playerInfo = {
+  playerName: initialsInput,
+  playerScore: timerE1.textContent
+  };
+  scoreArray.push(playerInfo)
+  localStorage.setItem("playerInfo", JSON.stringify(scoreArray));
+  initials.classList.add("hide");
+  highScore.classList.remove("hide"); 
+  showHighScore() 
+}
