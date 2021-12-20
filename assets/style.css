@@ -115,6 +115,9 @@ footer h2 {
   justify-content: center;
   font-size: 1em ;
 }
+.title  {
+  font-size: 2em;
+}
 table {  
   text-align: center;
   width: 100%;

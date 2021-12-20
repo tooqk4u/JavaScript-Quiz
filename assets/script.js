@@ -171,7 +171,7 @@ function showHighScore() {
   for (let i = 0; i < scoreArray.length; i++) {
     tdstring = tdstring + `<tr><td>${scoreArray[i].playerName}</td><td>${scoreArray[i].playerScore}</td></tr>`  
   }
-  highScore.innerHTML = `<h2>High Scores</h2>
+  highScore.innerHTML = `<h2 class="title">High Scores</h2>
   <table><tr><th>Initials</th><th>Score</th></tr> ${tdstring}</table>
   <a href="index.html"><button class="btn">Return to Quiz</button></a>`;
 }
