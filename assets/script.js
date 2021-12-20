@@ -168,3 +168,24 @@ function saveScores(){
   highScore.classList.remove("hide"); 
   showHighScore() 
 }
+function showHighScore() {
+  let tdstring = ""
+  
+  scoreArray = scoreArray.sort(function(current, next){
+    return next.playerScore - current.playerScore
+  });
+  for (let i = 0; i < scoreArray.length; i++) {
+    tdstring = tdstring + `<tr><td>${scoreArray[i].playerName}</td><td>${scoreArray[i].playerScore}</td></tr>`  
+  }
+  highScore.innerHTML = `<h2>High Scores</h2>
+  <table><tr><th>Initials</th><th>Score</th></tr> ${tdstring}</table>
+  <a href="index.html"><button class="btn">Return to Quiz</button></a>`;
+}
+
+score1.addEventListener("click", function(){
+  introBody.classList.add("hide");
+  initials.classList.add("hide");
+  highScore.classList.remove("hide"); 
+  showHighScore() 
+})
+
